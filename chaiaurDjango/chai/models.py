@@ -9,6 +9,16 @@ class ChaiVaraity(models.Model):
         ('KL', 'KIWI'),
         ('PL', 'PLAIN'),
         ('EL', 'ELACHI'),
+        ('GN', 'GREEN'),
+        ('BL', 'BLACK'),
+        ('WH', 'WHITE'),
+        ('OG', 'OOLONG'),
+        ('TI', 'TISANES'),
+        ('RO', 'ROOIBOS'),
+        ('MA', 'MATCHA'),
+        ('PU', 'PU-ERH'),
+        ('YE', 'YELLOW'),
+        
     ]
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='chais/')
