@@ -1,0 +1,156 @@
+{% extends "layout.html" %}
+{% comment %} {% extends "layout.html" %}
+
+{% block content %}
+test contet for forms
+<form method="POST" class="text-black">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Search Store</button>
+</form>
+
+{% if stores %}
+  <h2>Stores available</h2>
+  <ul>
+    {% for store in stores %}
+       <li>{{store.name}} - {{store.location}}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% endblock %} {% endcomment %}
+{% block title %}
+Available Store
+{% endblock %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chai Stores</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #FFDEE9, #B5FFFC);
+            color: #333;
+        }
+
+        .container {
+            width: 85%;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #6A0572;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        select, button {
+            font-size: 1rem;
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            background-color: #6A0572;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            background-color: #FF5733;
+        }
+
+        button:hover, select:hover {
+            background-color: #C70039;
+            transform: scale(1.05);
+        }
+
+        /* Store List Styles */
+        .store-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .store-card {
+            background: linear-gradient(145deg, #FF9A8B, #FDCB82, #FFB6C1);
+            color: #fff;
+            border-radius: 12px;
+            width: 250px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🌟 Explore Chai Stores 🌟</h2>
+        <form method="POST" class="text-black">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Search Store</button>
+        </form>
+        {% if stores %}
+            <div class="store-list">
+                {% for store in stores %}
+                    <div class="store-card">
+                        <strong>{{ store.name }}</strong>
+                        <p>{{ store.location }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p style="font-size: 1.2rem; color: #C70039;">No stores available. ☹️</p>
+        {% endif %}
+    </div>
+
+    <div class="mt-6 flex justify-center">
+        <a href={%url 'Home'%}
+           class="px-6 py-2 bg-blue-600 text-white font-semibold text-sm rounded-lg shadow-md hover:bg-yellow-500 transition-all duration-300">
+           ← Back to Home Page
+        </a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Chai Stores. Sip the Best, Live the Best! 🫖</p>
+    </footer>
+</body>
+</html>
+{% endblock %}

@@ -8,6 +8,9 @@ urlpatterns = [
     
     path('<int:chai_id>/',views.chai_details,name='Chai_details'),
     
+    path('chai_stores/',views.chai_store_view,name='Chai_stores'),
+    
     
 
 ]
+  
