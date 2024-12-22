@@ -19,6 +19,10 @@ test contet for forms
 {% endif %}
 
 {% endblock %} {% endcomment %}
+
+
+
+
 {% block title %}
 Available Store
 {% endblock %}
@@ -120,7 +124,9 @@ Available Store
     </style>
 </head>
 <body>
+    <br><br><br><br><br>
     <div class="container">
+
         <h2>🌟 Explore Chai Stores 🌟</h2>
         <form method="POST" class="text-black">
             {% csrf_token %}
@@ -132,7 +138,18 @@ Available Store
                 {% for store in stores %}
                     <div class="store-card">
                         <strong>{{ store.name }}</strong>
-                        <p>{{ store.location }}</p>
+                        <p>{{ store.location }}
+                            <a href="https://www.google.com/maps/search/{{store.name}}" target="_blank" 
+                            style="display: inline-block; padding: 15px 30px; background-color: #FFBD66; color: white; text-align: center; text-decoration: none; border-radius: 25px; font-size: 14px; font-weight: bold; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); transition: background-color 0.3s ease, transform 0.3s ease;">
+                            📍Location📍
+                            </a>
+                        </p>
+                        
+                         
+                      
+
+
+                        {% comment %} <a href="https://www.google.com/maps/search/{{ store.location }}" target="_blank">Search on Google Maps for Location Name</a> {% endcomment %}
                     </div>
                 {% endfor %}
             </div>
@@ -147,10 +164,13 @@ Available Store
            ← Back to Home Page
         </a>
     </div>
+    
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
     <footer>
-        <p>&copy; 2024 Chai Stores. Sip the Best, Live the Best! 🫖</p>
+        <p>&copy; 2024 Tea Stores. Sip the Best, Live the Best! 🫖</p>
     </footer>
 </body>
 </html>
-{% endblock %}
+{% endblock %} 
+ 

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Information</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script>
+        function updatePrice() {
+            const pricePerUnit = parseFloat(document.getElementById('tea_price').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const totalPrice = pricePerUnit * quantity;
+            document.getElementById('price').value = totalPrice.toFixed(2);
+            updateTotalPrice();
+        }
+
+        function updateAdditionalTeaPrice(teaId, quantityId, priceId) {
+            const teaSelect = document.getElementById(teaId);
+            const selectedOption = teaSelect.options[teaSelect.selectedIndex];
+            const pricePerUnit = parseFloat(selectedOption.dataset.price) || 0;
+            const quantity = parseInt(document.getElementById(quantityId).value) || 0;
+            const totalPrice = pricePerUnit * quantity;
+            document.getElementById(priceId).value = totalPrice.toFixed(2);
+            updateTotalPrice();
+        }
+
+        function addAnotherTea() {
+            const container = document.getElementById('additional-tea-container');
+            const index = container.children.length;
+            const teaSelectId = `additional_tea_${index}`;
+            const quantityId = `additional_quantity_${index}`;
+            const priceId = `additional_price_${index}`;
+
+            const teaSelect = document.createElement('div');
+            teaSelect.className = "mb-4 p-4 border-2 border-blue-400 rounded-lg shadow-sm";
+
+            teaSelect.innerHTML = `
+                <label for="${teaSelectId}" class="block text-gray-700 font-medium mb-2">Select Additional Tea</label>
+                <select id="${teaSelectId}" name="additional_tea[]" class="w-full px-4 py-2 border-2 border-green-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-pink-300" onchange="updateAdditionalTeaPrice('${teaSelectId}', '${quantityId}', '${priceId}')">
+                    {% for chai in chais %}
+                        <option value="{{ chai.id }}" data-price="{{ chai.price }}">{{ chai.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="${quantityId}" class="block text-gray-700 font-medium mt-4 mb-2">Quantity for Selected Tea</label>
+                <input type="number" id="${quantityId}" name="additional_quantity[]" min="1" placeholder="Enter quantity" class="w-full px-4 py-2 border-2 border-orange-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300" oninput="updateAdditionalTeaPrice('${teaSelectId}', '${quantityId}', '${priceId}')">
+
+                <label for="${priceId}" class="block text-gray-700 font-medium mt-4 mb-2">Price</label>
+                <input type="text" id="${priceId}" name="additional_price[]" readonly class="w-full px-4 py-2 border-2 border-purple-400 rounded-lg bg-gray-100">
+            `;
+
+            container.appendChild(teaSelect);
+        }
+
+        function updateTotalPrice() {
+            let total = 0;
+            total += parseFloat(document.getElementById('price').value) || 0;
+
+            const additionalPrices = document.querySelectorAll("input[name='additional_price[]']");
+            additionalPrices.forEach(input => {
+                total += parseFloat(input.value) || 0;
+            });
+
+            document.getElementById('total_price').textContent = `Total Price: $${total.toFixed(2)}`;
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-r from-purple-400 via-blue-400 to-purple-500 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-2xl w-[800px] border-4 border-yellow-300 relative">
+        <h1 class="text-3xl font-extrabold text-center text-gray-800 mb-6">Customer Information</h1>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-4 p-4 bg-gradient-to-r from-purple-600 via-blue-500 to-teal-400 border-2 border-yellow-300 rounded-lg shadow-lg">
+                <h2 class="text-sm font-bold text-white text-center tracking-wide uppercase">
+                    Selected Tea:
+                    <span class="text-yellow-200 underline decoration-wavy decoration-yellow-500">{{ tea_name }}</span>
+                </h2>
+            </div>
+
+            <input type="hidden" id="tea_price" value="{{ tea_price }}">
+
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-medium mb-2">Customer Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" class="w-full px-4 py-2 border-2 border-blue-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-yellow-300">
+            </div>
+
+            <div class="mb-4">
+                <label for="number" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                <input type="text" id="number" name="number" placeholder="Enter your number" class="w-full px-4 py-2 border-2 border-green-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-pink-300">
+            </div>
+
+            <div class="mb-4">
+                <label for="location" class="block text-gray-700 font-medium mb-2">Location</label>
+                <input type="text" id="location" name="location" placeholder="Enter your location" class="w-full px-4 py-2 border-2 border-purple-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-green-300">
+            </div>
+
+            <div class="mb-4">
+                <label for="quantity" class="block text-gray-700 font-medium mb-2">Number of Tea</label>
+                <input type="number" id="quantity" name="quantity" min="1" placeholder="Enter quantity" class="w-full px-4 py-2 border-2 border-orange-400 rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-300" oninput="updatePrice()">
+            </div>
+
+            <div class="mb-4">
+                <label for="price" class="block text-gray-700 font-medium mb-2">Price</label>
+                <input type="text" id="price" name="price" readonly class="w-full px-4 py-2 border-2 border-purple-400 rounded-lg bg-gray-100">
+            </div>
+
+            <div id="additional-tea-container"></div>
+
+            <div class="flex justify-between items-center space-x-4 mt-6">
+                <button type="button" onclick="addAnotherTea()" class="bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 w-1/2 text-white font-bold py-2 px-4 rounded-lg hover:opacity-90 shadow-lg transition transform hover:scale-105 ease-in-out duration-300">
+                    + Add Another
+                </button>
+
+                <button type="submit" class="bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 w-1/2 text-white font-bold py-2 px-4 rounded-lg hover:opacity-90 shadow-lg transition transform hover:scale-105 ease-in-out duration-300">
+                    &#10003; Order Now
+                </button>
+            </div>
+
+            <div class="mt-6 bg-gradient-to-r from-yellow-500 via-red-400 to-blue-400 text-white font-bold px-6 py-3 rounded-lg shadow-xl text-lg transform hover:scale-105 transition-all duration-600 text-center">
+                <span id="total_price">Total Price: $0.00</span>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

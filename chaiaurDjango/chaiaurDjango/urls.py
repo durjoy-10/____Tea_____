@@ -25,7 +25,6 @@ urlpatterns = [
     path('',views.home,name='Home'),
     path('about/',views.about,name='About'),
     path('contact/',views.contact,name='Contact'),
-    path('contact/',views.contact,name='Contact'),
     path('chai/',include('chai.urls')),
     
     

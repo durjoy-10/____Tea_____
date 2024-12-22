@@ -4,70 +4,71 @@
 Home Page
 {% endblock %}
 
-
 {% block content %}
-
 <div class="container mx-auto p-6">
-    <header class="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 text-center">
-        <h1 class="text-4xl font-bold">CHAI WITH YOUR ALL FAVOURITE FLAVOUR</h1>
-        <p class="text-lg mt-2">Your daily dose of chai!</p>
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-16 text-center rounded-lg shadow-md">
+        <h1 class="text-5xl font-extrabold leading-tight mb-4">Tea with Your Favourite Flavour</h1>
+        <p class="text-lg font-medium mt-2">Your Daily Dose of Refreshment!</p>
     </header>
     
-
-    <section class="mt-6">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 text-center">
-            <div class="bg-gradient-to-r from-green-500 to-teal-500 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">HEY TEA LOVERS</h2>
-                <p class="text-center mt-4 text-lg">YOUR ALL CHAI IS HERE</p>
-                {% comment %} <br> {% endcomment %} 
-                <div class="mt-6 flex justify-center">
-                    <a href="/chai/" 
-                       class="px-6 py-2 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold text-sm rounded-lg shadow-md hover:from-purple-600 hover:to-green-400 transition-all duration-300">
-                       CHECK
-                    </a>
-                </div>
-                
+    <!-- Main Content Section -->
+    <section class="mt-12">
+        <!-- First Row of Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Tea Lovers Card -->
+            <div class="bg-gradient-to-r from-green-500 to-teal-600 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Hey Tea Lovers!</h2>
+                <p class="text-lg mb-6">Your All Favourite Tea Is Here</p>
+                <a href="/chai/" class="px-8 py-3 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold text-lg rounded-lg shadow-md hover:from-purple-600 hover:to-green-400 transition-all duration-300 transform hover:scale-105">
+                    Explore Our Teas
+                </a>
             </div>
 
-            <div class="bg-gradient-to-r from-orange-500 to-yellow-600 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">AVAILABLE TEA</h2>
-                <p class="text-center mt-4 text-lg">IN THE SHOP WITH IT'S LOCATION</p>
-                <div class="mt-6 flex justify-center">
-                    <a href="/chai/chai_stores/" 
-                       class="px-6 py-2 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold text-sm rounded-lg shadow-md hover:from-purple-600 hover:to-green-400 transition-all duration-300">
-                       SEARCH
-                    </a>
-                </div>
+            <!-- Available Tea Card -->
+            <div class="bg-gradient-to-r from-orange-500 to-yellow-600 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Available Teas Near You</h2>
+                <p class="text-lg mb-6">Find Tea Locations in Your Area</p>
+                <a href="/chai/chai_stores/" class="px-8 py-3 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 text-white font-semibold text-lg rounded-lg shadow-md hover:from-purple-600 hover:to-green-400 transition-all duration-300 transform hover:scale-105">
+                    Search for Stores
+                </a>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-gradient-to-r from-indigo-500 to-purple-700 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">Feature 3</h2>
-                <p class="text-center mt-4 text-lg">Collaborate with like-minded individuals.</p>
+        <!-- Second Row of Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Feature 3 Card -->
+            <div class="bg-gradient-to-r from-indigo-500 to-purple-700 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Collaborate with Tea Enthusiasts</h2>
+                <p class="text-lg mb-6">Share Ideas and Experiences with Fellow Tea Lovers</p>
             </div>
 
-            <div class="bg-gradient-to-r from-pink-500 to-red-500 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">Feature 4</h2>
-                <p class="text-center mt-4 text-lg">Discover new ways to enjoy chai.</p>
+            <!-- Feature 4 Card -->
+            <div class="bg-gradient-to-r from-pink-500 to-red-500 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Discover New Tea Flavours</h2>
+                <p class="text-lg mb-6">Experiment with Unique Chai Blends</p>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-gradient-to-r from-cyan-500 to-blue-400 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">Feature 5</h2>
-                <p class="text-center mt-4 text-lg">Experience the art of tea making.</p>
+        <!-- Third Row of Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mb-12">
+            <!-- Feature 5 Card -->
+            <div class="bg-gradient-to-r from-cyan-500 to-blue-400 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Experience the Art of Tea Making</h2>
+                <p class="text-lg mb-6">Perfect Your Tea Brewing Skills</p>
             </div>
 
-            <div class="bg-gradient-to-r from-yellow-400 to-green-500 p-12 rounded shadow-lg text-white flex flex-col items-center">
-                <h2 class="text-4xl font-semibold text-center">Feature 6</h2>
-                <p class="text-center mt-4 text-lg">Share your favorite chai recipes.</p>
+            <!-- Feature 6 Card -->
+            <div class="bg-gradient-to-r from-yellow-400 to-green-500 p-10 rounded-lg shadow-lg text-white flex flex-col items-center">
+                <h2 class="text-3xl font-semibold mb-4">Share Your Favourite Recipes</h2>
+                <p class="text-lg mb-6">Exchange Chai Recipes with Fellow Fans</p>
             </div>
         </div>
     </section>
 
-    <footer class="mt-6 text-center text-gray-700">
-        <p>&copy; 2024 Chai. All Rights Reserved.</p>
+    <!-- Footer Section -->
+    <footer class="mt-12 py-6 text-center text-gray-600 bg-gray-100 rounded-lg shadow-md">
+        <p class="text-lg font-medium">&copy; 2024 Chai. All Rights Reserved.</p>
     </footer>
 </div>
 {% endblock %}

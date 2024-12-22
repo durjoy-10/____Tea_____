@@ -10,6 +10,8 @@ urlpatterns = [
     
     path('chai_stores/',views.chai_store_view,name='Chai_stores'),
     
+    path('buy_tea/',views.buy_tea,name='buy_tea')
+    
     
 
 ]
