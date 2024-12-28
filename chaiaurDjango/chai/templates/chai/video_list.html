@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video List</title>
+    <style>
+        /* Global styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Vibrant gradient */
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Page container */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Heading styles */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #ffd700; /* Golden color */
+            text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ff8c00;
+            }
+            to {
+                text-shadow: 0 0 20px #ff8c00, 0 0 30px #ff4500, 0 0 40px #ff8c00;
+            }
+        }
+
+        /* Video list container */
+        .video-list {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start; /* Align items to the left */
+            flex-direction: row; /* Horizontal layout */
+            overflow-x: auto; /* Add horizontal scroll if videos overflow */
+            padding-bottom: 20px; /* Add space below the row */
+        }
+
+        /* Individual video card */
+        .video-card {
+            background: rgba(255, 255, 255, 0.2); /* Transparent card effect */
+            border-radius: 15px;
+            padding: 15px;
+            width: 300px; /* Fixed width for each card */
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px); /* Lift effect */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Title styling with fixed height */
+        h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ffdd57; /* Gold text */
+            height: 60px; /* Fixed height */
+            overflow: hidden; /* Hide overflow text */
+            text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+            white-space: normal; /* Allow wrapping */
+            text-align: center;
+        }
+
+        /* Description styling with fixed height */
+        p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            height: 100px; /* Fixed height */
+            overflow: hidden; /* Hide overflow text */
+            text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+            white-space: normal; /* Allow wrapping */
+            text-align: center;
+        }
+
+        video {
+            width: 300px; /* Fixed width */
+            height: 200px; /* Fixed height */
+            border: 2px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3); /* Frame shadow */
+        }
+
+        /* Button container with flexbox */
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Space out buttons */
+            align-items: center; /* Center buttons vertically */
+            margin-top: 30px;
+            gap: 20px; /* Add spacing between buttons */
+        }
+
+        /* Button styling with equal widths */
+        .home-btn, .upload-btn {
+            flex: 1; /* Take equal space */
+            margin: 0 10px; /* Add spacing on left and right */
+            text-align: center;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Gradient button */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .home-btn:hover, .upload-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .video-card {
+                width: calc(33.33% - 20px); /* Three cards per row */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-card {
+                width: calc(50% - 20px); /* Two cards per row */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-card {
+                width: 100%; /* One card per row */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Uploaded Videos ✨</h1>
+        <div class="video-list">
+            {% for video in videos %}
+                <div class="video-card">
+                    <h2>{{ video.title }}</h2>
+                    <p>{{ video.description }}</p>
+                    <video controls>
+                        <source src="{{ video.video_file.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="button-container">
+            <a href="{% url 'Home' %}" class="home-btn">Home</a>
+            <a href="{% url 'upload_video' %}" class="upload-btn">Upload More Videos</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -69,7 +69,6 @@ class ChaiCertificate(models.Model):
 class CustomerOrder(models.Model):
     name = models.CharField(max_length=100)
     number = models.CharField(max_length=15)
-    location = models.CharField(max_length=255)
     tea_name = models.CharField(max_length=100)
     tea_price = models.DecimalField(max_digits=10, decimal_places=2)
     quantity = models.IntegerField()
@@ -80,3 +79,23 @@ class CustomerOrder(models.Model):
 
     def __str__(self):
         return f"Order by {self.name} - {self.total_price}"
+    
+    
+class Review(models.Model):
+    name = models.CharField(max_length=100)
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])  # Ratings from 1 to 5
+    review = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.rating} Stars"
+    
+class Video(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    video_file = models.FileField(upload_to='videos/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    

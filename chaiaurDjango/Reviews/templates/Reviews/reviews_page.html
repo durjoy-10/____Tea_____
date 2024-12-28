@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .overall-rating {
+            float: right;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        .reviews-list {
+            margin-top: 20px;
+        }
+        .review-item {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .message {
+            color: green;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="overall-rating">
+            <h3>Overall Rating: {{ overall_rating }}/5</h3>
+        </div>
+        <h1>Submit Your Review</h1>
+        <div class="form-container">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit</button>
+            </form>
+            {% if message %}
+            <p class="message">{{ message }}</p>
+            {% endif %}
+        </div>
+        <div class="reviews-list">
+            <h2>User Reviews</h2>
+            {% for review in reviews %}
+            <div class="review-item">
+                <h4>{{ review.name }} - {{ review.rating }} Stars</h4>
+                <p>{{ review.review }}</p>
+                <small>Reviewed on {{ review.created_at|date:"F d, Y" }}</small>
+            </div>
+            {% empty %}
+            <p>No reviews yet. Be the first to leave one!</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404 , redirect
-from .models import ChaiVaraity, Store ,CustomerOrder
-from .forms import ChaiVarityForm ,CustomerOrderForm
-from django.contrib import messages  # For user notifications
+from .models import ChaiVaraity, Store ,CustomerOrder,Review,Video
+from .forms import ChaiVarityForm ,CustomerOrderForm,ReviewForm,VideoForm
+from django.contrib import messages 
+from django.db.models import Avg
+from django.urls import reverse
 import json 
 
 # View to display all chai varieties
@@ -29,7 +31,7 @@ def buy_tea(request):
     if request.method == 'POST':
         form = CustomerOrderForm(request.POST)
         if form.is_valid():
-            # Initialize additional teas data
+            # Handle additional tea data
             additional_tea = []
             selected_teas = request.POST.getlist('additional_tea[]')
             quantities = request.POST.getlist('additional_quantity[]')
@@ -57,8 +59,8 @@ def buy_tea(request):
             order.additional_tea = additional_tea  # JSON serialization handled by Django's JSONField
             order.save()
 
-            messages.success(request, 'Order placed successfully!')
-            return redirect('all_chai')
+            # Redirect to a thank-you page
+            return render(request, 'chai/thank_you.html', {'order': order})
         else:
             messages.error(request, 'Please correct the errors below.')
 
@@ -71,7 +73,7 @@ def buy_tea(request):
         'form': form,
         'chais': ChaiVaraity.objects.all(),
     })
-    
+
     
 # View for displaying chai stores
 def chai_store_view(request):
@@ -90,3 +92,49 @@ def chai_store_view(request):
     
     # Render the template with the form and stores queryset
     return render(request, 'chai/chai_stores.html', {'stores': stores, 'form': form})
+
+
+
+def reviews_page(request):
+    form = ReviewForm()
+    message = ""
+    
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form.save()
+            message = "Thank You Sir"
+            form = ReviewForm()  # Reset the form after submission
+    
+    # Calculate the overall rating
+    overall_rating = Review.objects.aggregate(Avg('rating'))['rating__avg']
+    overall_rating = round(overall_rating, 2) if overall_rating else 0
+
+    # Fetch all reviews and order by creation date (newest first)
+    reviews = Review.objects.all().order_by('-created_at')  # Added ordering by created_at (desc)
+
+    return render(request, 'chai/reviews_page.html', {
+        'form': form,
+        'message': message,
+        'overall_rating': overall_rating,
+        'reviews': reviews,
+    })
+
+
+def upload_video(request):
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('video_list')  # Redirect to a video list view
+    else:
+        form = VideoForm()
+    return render(request, 'chai/upload_video.html', {'form': form})
+
+def video_list(request):
+    videos = Video.objects.all().order_by('-uploaded_at') 
+    return render(request, 'chai/video_list.html', {'videos': videos})
+
+
+
+

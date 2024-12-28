@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Video</title>
+    <style>
+        /* Global styles */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4b0082, #2c3e50, #1abc9c); /* Night sky with a mystical vibe */
+
+            background-size: 600% 600%;
+            animation: gradientBG 6s ease infinite; /* Animation for gradient */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        /* Gradient background animation */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Styling for the Uploaded Videos button */
+        .shared-style {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6a00, #ff9e00); /* Vibrant gradient */
+            color: white;
+            padding: 14px 25px;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.4s ease, background 0.3s ease;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .shared-style:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ff9e00, #ff6a00); 
+        }
+
+        /* Main container */
+        .upload-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px 45px;
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+            overflow: hidden;
+            backdrop-filter: blur(5px); /* Background blur effect */
+        }
+
+        /* Animation for form appearance */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Heading styling */
+        .upload-container h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #ff6a00, #ff9e00);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Text shadow for extra pop */
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: stretch;
+        }
+
+        /* Input field style */
+        form input[type="text"],
+        form textarea,
+        form input[type="file"] {
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 18px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form textarea:focus,
+        form input[type="file"]:focus {
+            border-color: #ff9e00;
+            box-shadow: 0 0 5px rgba(255, 158, 0, 0.7);
+        }
+
+        /* Textarea styling */
+        form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Submit button styling */
+        form button {
+            background: linear-gradient(135deg, #ff9e00, #ff6a00);
+            border: none;
+            color: white;
+            font-size: 20px;
+            padding: 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        form button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 480px) {
+            .upload-container {
+                padding: 20px 25px;
+            }
+
+            .upload-container h1 {
+                font-size: 28px;
+            }
+
+            form input[type="text"],
+            form textarea,
+            form input[type="file"] {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            form button {
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .shared-style {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="upload-container">
+        <h1>Upload Your Video</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Video Title -->
+            <input type="text" name="title" placeholder="Enter Video Title" required>
+
+            <!-- Video Description -->
+            <textarea name="description" placeholder="Enter a brief description of your video" required></textarea>
+
+            <!-- Video File Upload -->
+            <input type="file" name="video_file" accept="video/*" required>
+
+            <!-- Submit Button -->
+            <button type="submit">Upload Video</button>
+        </form>
+
+        <br>
+
+        <!-- Link to uploaded videos -->
+        <a href="{% url 'video_list' %}" class="shared-style">Uploaded Videos</a>
+
+    </div>
+
+</body>
+</html>
