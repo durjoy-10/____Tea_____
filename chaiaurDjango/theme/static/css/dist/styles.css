@@ -783,10 +783,6 @@ select {
   }
 }
 
-.collapse {
-  visibility: collapse;
-}
-
 .static {
   position: static;
 }
@@ -884,10 +880,6 @@ select {
   display: flex;
 }
 
-.table {
-  display: table;
-}
-
 .grid {
   display: grid;
 }
@@ -930,10 +922,6 @@ select {
 
 .max-w-4xl {
   max-width: 56rem;
-}
-
-.border-collapse {
-  border-collapse: collapse;
 }
 
 .transform {
