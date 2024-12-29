@@ -23,6 +23,8 @@ urlpatterns = [
     
     path('thank_you/', TemplateView.as_view(template_name='chai/thank_you.html'), name='thank_you'),
     
+    path('contact/',views.contact,name='contact'),
+    
     
 ]
 

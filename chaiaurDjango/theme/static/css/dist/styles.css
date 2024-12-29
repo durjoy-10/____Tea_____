@@ -1227,6 +1227,11 @@ select {
   --tw-gradient-stops: var(--tw-gradient-from), #f97316 var(--tw-gradient-via-position), var(--tw-gradient-to);
 }
 
+.via-pink-400 {
+  --tw-gradient-to: rgb(244 114 182 / 0)  var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), #f472b6 var(--tw-gradient-via-position), var(--tw-gradient-to);
+}
+
 .via-pink-500 {
   --tw-gradient-to: rgb(236 72 153 / 0)  var(--tw-gradient-to-position);
   --tw-gradient-stops: var(--tw-gradient-from), #ec4899 var(--tw-gradient-via-position), var(--tw-gradient-to);

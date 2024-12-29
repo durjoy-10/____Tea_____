@@ -135,6 +135,9 @@ def video_list(request):
     videos = Video.objects.all().order_by('-uploaded_at') 
     return render(request, 'chai/video_list.html', {'videos': videos})
 
+def contact(request):
+    return render(request,'chai/contact.html')
+
 
 
 
