@@ -6,6 +6,130 @@ Home Page
 
 {% block content %}
 <div class="container mx-auto p-6">
+    <style>
+      /* Animation for the gradient flow */
+      @keyframes gradient-flow {
+          0% {
+              background-position: 0% 50%;
+          }
+          50% {
+              background-position: 100% 50%;
+          }
+          100% {
+              background-position: 0% 50%;
+          }
+      }
+  
+      .animate-gradient-flow {
+          background-size: 200% 200%;
+          animation: gradient-flow 6s infinite;
+      }
+  
+      /* General hover and text effects */
+      nav a {
+          text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      }
+  
+      nav a:hover {
+          text-shadow: 1px 1px 6px rgba(255, 255, 0, 0.5);
+      }
+  
+      /* Card hover effects */
+      .hover\\:shadow-2xl:hover {
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+  
+      .hover\\:scale-105:hover {
+          transform: scale(1.05);
+      }
+  
+      .transition-transform {
+          transition: transform 0.3s ease-in-out;
+      }
+  
+      .transition-all {
+          transition: all 0.3s ease-in-out;
+      }
+  
+      .hover\\:bg-orange-600:hover {
+          background-color: #fb923c;
+      }
+  
+      .hover\\:bg-teal-600:hover {
+          background-color: #059669;
+      }
+  
+      .hover\\:bg-blue-600:hover {
+          background-color: #2563eb;
+      }
+  
+      .hover\\:scale-110:hover {
+          transform: scale(1.1);
+      }
+  
+      .shadow-md {
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+  
+      .rounded-full {
+          border-radius: 9999px;
+      }
+    </style>
+  
+    <!-- Navigation Bar -->
+    <nav class="bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 text-white shadow-lg rounded-lg mb-8 border border-purple-800 relative overflow-hidden">
+      <!-- Animated Gradient Overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-indigo-400 via-purple-500 to-blue-400 opacity-20 animate-gradient-flow"></div>
+      <div class="relative z-10 flex justify-between items-center px-8 py-5">
+          <!-- Logo -->
+          <a href="/" 
+             class="text-3xl font-extrabold tracking-wider text-white hover:text-yellow-300 transition duration-300 transform hover:scale-110 shadow-md">
+              Tea Haven
+          </a>
+          <!-- Navigation Links -->
+          <ul class="flex space-x-8">
+              <li>
+                  <a href="/chai/" 
+                     class="relative text-lg font-semibold group transition duration-300 hover:text-yellow-300">
+                      Explore Teas
+                      <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-yellow-300 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="/chai/chai_stores/" 
+                     class="relative text-lg font-semibold group transition duration-300 hover:text-yellow-300">
+                      Find Stores
+                      <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-yellow-300 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="/chai/reviews/" 
+                     class="relative text-lg font-semibold group transition duration-300 hover:text-yellow-300">
+                      Reviews
+                      <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-yellow-300 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="/chai/upload_video/" 
+                     class="relative text-lg font-semibold group transition duration-300 hover:text-yellow-300">
+                      Blend Flavors
+                      <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-yellow-300 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+              </li>
+              <li>
+                  <a href="/chai/contact/" 
+                     class="relative text-lg font-semibold group transition duration-300 hover:text-yellow-300">
+                      Contact Us
+                      <span class="absolute left-0 bottom-0 h-0.5 w-0 bg-yellow-300 transition-all duration-300 group-hover:w-full"></span>
+                  </a>
+              </li>
+          </ul>
+      </div>
+    </nav>
+  
+    <!-- Other content here -->
+  </div>
+<div class="container mx-auto p-6">
     <!-- Header Section -->
     <header class="bg-gradient-to-tr from-[#FAE2E0] via-[#C7D0D7] to-[#657889] text-zinc-600 py-20 text-center rounded-lg shadow-xl relative">
 
