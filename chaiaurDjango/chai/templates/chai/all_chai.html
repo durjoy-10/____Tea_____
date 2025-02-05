@@ -23,7 +23,8 @@ Chai - Your Perfect Brew
     {% for chai in chais %}
     <div class="bg-gradient-to-tl from-indigo-500 to-purple-700 p-6 rounded-xl shadow-xl transition transform hover:scale-105 hover:shadow-2xl">
         <div class="relative">
-            <img class="rounded-lg shadow-xl max-h-60 w-full object-cover" src="{{ chai.image.url }}" alt="{{ chai.name }}">
+            <img class="rounded-lg shadow-xl w-full h-48 object-cover" src="{{ chai.image.url }}" alt="{{ chai.name }}">
+
             <div class="absolute bottom-4 left-4 p-2 bg-black bg-opacity-50 text-white rounded-lg text-xl font-bold">
                 {{ chai.name }}
             </div>
